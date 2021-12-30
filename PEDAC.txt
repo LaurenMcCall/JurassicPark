@@ -1,0 +1,65 @@
+PROBLEM:
+  create a database to manage dinosaurs in a zoo
+
+EXAMPLE:
+  
+DATA:
+- class called Dinosaurs
+  - Properties:
+    - Name
+    - DietType ("carnivore" or "herbivore")
+    - WhenAcquired
+    - Weight (in lbs)
+    - EnclosureNumber
+
+- method called Description
+  - within the Dinosaurs class 
+  - prints out description of an individual dinosaur that includes 
+    the properties in the Dinosaurs class.
+
+- List<Dinosaurs>
+  - keeps track of my Dinosaurs
+
+- DisplayGreeting(); method
+
+- user should be able to interact with database using the following in a menu:
+  - View
+  - Add
+  - Remove
+  - Transfer
+  - Summary
+  - Quit
+(these can be if/else or switch statements)
+
+- LINQ to remove dinosaurs from the park list.
+
+ALGORITHM
+- display welcome greeting
+- display menu  
+  - "Please make a selection:
+    (V)IEW dinosaurs in the park  
+    (A)DD dinosaurs to the park 
+    (R)EMOVE dinosaurs from the park
+    (T)RANSFER dinosaurs 
+    (S)UMMARY Dinosaurs
+    (Q)UIT 
+- if (V)IEW is selected:
+  - would you like to see the dinosaurs in Name or EnclosureNumber order?
+    - (if Name) print out Dinos by Name
+    - (if EnclosureNumber) print out Dinos by EnclosureNumber
+    - (if there are no dinos in park) "I'm sorry, our park is only full dino eggs right now. Check by once they've hatched"
+- if (A)DD is selected:
+  - will prompt for the Name, DietType, Weight and EnclosureNumber. DateTime will be provided by code.
+- if (R)EMOVE is selected:
+  - Remove LINQ to remove dinosaur instance from the park list.
+- if (T)RANSFER is selected:
+  - PromptForString the dinosaur Name
+  - PromptForInteger the new EnclosureNumber 
+- if (S)UMMARY is selected:
+  - will display the number of carnivores and herbivores in the park list. 
+- if (Q)UIT is selected:
+  - stop running the program.
+
+
+
+
