@@ -26,16 +26,16 @@ namespace JurassicPark
         private List<Dinosaur> Dinosaurs { get; set; } = new List<Dinosaur>();
 
         // METHOD for adding a dino
-        public void AddDinosaur(Dinosaur addDino)
-        {
-            Dinosaurs.Add(addDino);
-        }
+        // public void AddDinosaur(Dinosaur addDino)
+        // {
+        //     Dinosaurs.Add(addDino);
+        // }
 
         // METHOD for deleting a dino
-        public void RemoveDinosaur(Dinosaur removeDino)
-        {
-            Dinosaurs.Remove(removeDino);
-        }
+        // public void RemoveDinosaur(Dinosaur removeDino)
+        // {
+        //     Dinosaurs.Remove(removeDino);
+        // }
     }
 
     class Program
@@ -85,6 +85,7 @@ namespace JurassicPark
             var dinosaurs = new List<Dinosaur>();
 
 
+
             DisplayGreeting();
 
             var keepGoing = true;
@@ -114,13 +115,14 @@ namespace JurassicPark
                 switch (choice)
                 {
                     case "V":
+
                         break;
 
                     case "A":
                         var dino = new Dinosaur();
 
-                        dino.Name = PromptForString("What is your dino's name? ");
-                        dino.DietType = PromptForString("Is your dino an (O)mnivore or a (C)arnivore? ");
+                        dino.Name = PromptForString("What is your dino's name? ").ToUpper();
+                        dino.DietType = PromptForString("Is your dino an (O)mnivore or a (C)arnivore? ").ToUpper();
                         dino.WhenAcquired = DateTime.Now;
                         dino.Weight = PromptForInteger("How much does your dino weigh in pounds? ");
                         dino.EnclosureNumber = PromptForInteger("Please assign an enclosure number to your dino: ");
@@ -129,7 +131,7 @@ namespace JurassicPark
                         break;
 
                     case "R":
-                        var name = PromptForString("What is the name of the dinosaur you'd like to remove? ");
+                        var name = PromptForString("What is the name of the dinosaur you'd like to remove? ").ToUpper();
 
                         Dinosaur foundDino = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == name);
 
@@ -141,10 +143,15 @@ namespace JurassicPark
                         }
                         else
                         {
-                            var confirmRemoval = PromptForString($"Are you sure you want to remove{foundDino.Name} from the park? (Y)ES or (N)O ").ToUpper();
+                            Console.WriteLine("");
+                            var confirmRemoval = PromptForString($"Are you sure you want to remove {foundDino.Name} from the park? (Y)ES or (N)O ").ToUpper();
                             if (confirmRemoval == "Y")
                             {
                                 dinosaurs.Remove(foundDino);
+                                Console.WriteLine("");
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.WriteLine($"{foundDino.Name} has been removed from the park. Bye, {foundDino.Name}! We'll miss you 💙 ");
+                                Console.WriteLine("");
                             }
                         }
                         break;
