@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace JurassicPark
 {
@@ -17,6 +18,24 @@ namespace JurassicPark
         //   - prints out description of an individual dinosaur that includes 
         //     the properties in the Dinosaurs class.
 
+    }
+
+    class DinosaurDatabase
+    {
+        // QUESTION ABOUT THIS...
+        private List<Dinosaur> Dinosaurs { get; set; } = new List<Dinosaur>();
+
+        // METHOD for adding a dino
+        public void AddDinosaur(Dinosaur addDino)
+        {
+            Dinosaurs.Add(addDino);
+        }
+
+        // METHOD for deleting a dino
+        public void RemoveDinosaur(Dinosaur removeDino)
+        {
+            Dinosaurs.Remove(removeDino);
+        }
     }
 
     class Program
@@ -102,6 +121,7 @@ namespace JurassicPark
 
                         dino.Name = PromptForString("What is your dino's name? ");
                         dino.DietType = PromptForString("Is your dino an (O)mnivore or a (C)arnivore? ");
+                        dino.WhenAcquired = DateTime.Now;
                         dino.Weight = PromptForInteger("How much does your dino weigh in pounds? ");
                         dino.EnclosureNumber = PromptForInteger("Please assign an enclosure number to your dino: ");
 
@@ -109,6 +129,24 @@ namespace JurassicPark
                         break;
 
                     case "R":
+                        var name = PromptForString("What is the name of the dinosaur you'd like to remove? ");
+
+                        Dinosaur foundDino = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == name);
+
+                        if (foundDino == null)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("");
+                            Console.WriteLine("❗No match found❗");
+                        }
+                        else
+                        {
+                            var confirmRemoval = PromptForString($"Are you sure you want to remove{foundDino.Name} from the park? (Y)ES or (N)O ").ToUpper();
+                            if (confirmRemoval == "Y")
+                            {
+                                dinosaurs.Remove(foundDino);
+                            }
+                        }
                         break;
 
                     case "T":
@@ -123,7 +161,8 @@ namespace JurassicPark
 
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("That is not a valid selection. Try again.");
+                        Console.WriteLine("");
+                        Console.WriteLine("❗That is not a valid selection. Try again❗");
                         break;
                 }
             }
@@ -136,11 +175,11 @@ namespace JurassicPark
 //   - would you like to see the dinosaurs in Name or EnclosureNumber order?
 //     - (if Name) print out Dinos by Name
 //     - (if EnclosureNumber) print out Dinos by EnclosureNumber
-//     - (if there are no dinos in park) "I'm sorry, our park is only full dino eggs right now. Check by once they've hatched"
-// - if (A)DD is selected:
-//   - will prompt for the Name, DietType, Weight and EnclosureNumber. DateTime will be provided by code.
+//     - (if there are no dinos in park) "I'm sorry, our park is only full of dino 
+// eggs right now. Check by once they've hatched"
 // - if (R)EMOVE is selected:
 //   - Remove LINQ to remove dinosaur instance from the park list.
+
 // - if (T)RANSFER is selected:
 //   - PromptForString the dinosaur Name
 //   - PromptForInteger the new EnclosureNumber 
