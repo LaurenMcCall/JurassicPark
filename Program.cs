@@ -92,20 +92,39 @@ namespace JurassicPark
                 Console.ForegroundColor = ConsoleColor.White;
                 var choice = Console.ReadLine().ToUpper();
 
-                if (choice == "Q")
+                switch (choice)
                 {
-                    keepGoing = false;
-                }
-                else
-                {
-                    var dino = new Dinosaur();
+                    case "V":
+                        break;
 
-                    dino.Name = PromptForString("What is your dino's name? ");
-                    dino.DietType = PromptForString("Is your dino an (O)mnivore or a (C)arnivore? ");
-                    dino.Weight = PromptForInteger("How much does your dino weigh in pounds? ");
-                    dino.EnclosureNumber = PromptForInteger("Please assign an enclosure number to your dino: ");
+                    case "A":
+                        var dino = new Dinosaur();
 
-                    dinosaurs.Add(dino);
+                        dino.Name = PromptForString("What is your dino's name? ");
+                        dino.DietType = PromptForString("Is your dino an (O)mnivore or a (C)arnivore? ");
+                        dino.Weight = PromptForInteger("How much does your dino weigh in pounds? ");
+                        dino.EnclosureNumber = PromptForInteger("Please assign an enclosure number to your dino: ");
+
+                        dinosaurs.Add(dino);
+                        break;
+
+                    case "R":
+                        break;
+
+                    case "T":
+                        break;
+
+                    case "S":
+                        break;
+
+                    case "Q":
+                        keepGoing = false;
+                        break;
+
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("That is not a valid selection. Try again.");
+                        break;
                 }
             }
         }
@@ -113,16 +132,6 @@ namespace JurassicPark
 }
 
 // ALGORITHM
-
-
-// - display menu  
-//   - "Please make a selection:
-//     (V)IEW dinosaurs in the park  
-//     (A)DD dinosaurs to the park 
-//     (R)EMOVE dinosaurs from the park
-//     (T)RANSFER dinosaurs 
-//     (S)UMMARY Dinosaurs
-//     (Q)UIT 
 // - if (V)IEW is selected:
 //   - would you like to see the dinosaurs in Name or EnclosureNumber order?
 //     - (if Name) print out Dinos by Name
