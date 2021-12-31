@@ -20,23 +20,23 @@ namespace JurassicPark
 
     }
 
-    class DinosaurDatabase
-    {
-        // QUESTION ABOUT THIS...
-        private List<Dinosaur> Dinosaurs { get; set; } = new List<Dinosaur>();
+    // class DinosaurDatabase
+    // {
+    //     // QUESTION ABOUT THIS...
+    //     private List<Dinosaur> Dinosaurs { get; set; } = new List<Dinosaur>();
 
-        // METHOD for adding a dino
-        // public void AddDinosaur(Dinosaur addDino)
-        // {
-        //     Dinosaurs.Add(addDino);
-        // }
+    //     // METHOD for adding a dino
+    //     // public void AddDinosaur(Dinosaur addDino)
+    //     // {
+    //     //     Dinosaurs.Add(addDino);
+    //     // }
 
-        // METHOD for deleting a dino
-        // public void RemoveDinosaur(Dinosaur removeDino)
-        // {
-        //     Dinosaurs.Remove(removeDino);
-        // }
-    }
+    //     // METHOD for deleting a dino
+    //     // public void RemoveDinosaur(Dinosaur removeDino)
+    //     // {
+    //     //     Dinosaurs.Remove(removeDino);
+    //     // }
+    // }
 
     class Program
     {
@@ -82,8 +82,36 @@ namespace JurassicPark
         {
             //   - List<Dinosaurs>
             //     - keeps track of my Dinosaurs
-            var dinosaurs = new List<Dinosaur>();
 
+            // var dinosaurs = new List<Dinosaur>();
+
+            var dinosaurs = new List<Dinosaur>();
+            {
+                new Dinosaur()
+                {
+                    Name = "Tom",
+                    DietType = "Omnivore",
+                    WhenAcquired = DateTime.Now,
+                    Weight = 422,
+                    EnclosureNumber = 1,
+                };
+                new Dinosaur()
+                {
+                    Name = "Sue",
+                    DietType = "Omnivore",
+                    WhenAcquired = DateTime.Now,
+                    Weight = 1002,
+                    EnclosureNumber = 3,
+                };
+                new Dinosaur()
+                {
+                    Name = "Ted",
+                    DietType = "Omnivore",
+                    WhenAcquired = DateTime.Now,
+                    Weight = 16,
+                    EnclosureNumber = 5,
+                };
+            };
 
 
             DisplayGreeting();
@@ -115,6 +143,7 @@ namespace JurassicPark
                 switch (choice)
                 {
                     case "V":
+
 
                         break;
 
@@ -205,9 +234,6 @@ namespace JurassicPark
 // - if (R)EMOVE is selected:
 //   - Remove LINQ to remove dinosaur instance from the park list.
 
-// - if (T)RANSFER is selected:
-//   - PromptForString the dinosaur Name
-//   - PromptForInteger the new EnclosureNumber 
 // - if (S)UMMARY is selected:
 //   - will display the number of carnivores and herbivores in the park list. 
 // - if (Q)UIT is selected:
