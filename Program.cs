@@ -157,7 +157,7 @@ namespace JurassicPark
                         break;
 
                     case "T":
-                        var nameToMove = PromptForString("What is the name of the dinosaur you'd like to remove? ").ToUpper();
+                        var nameToMove = PromptForString("What is the name of the dinosaur you'd like to transfer? ").ToUpper();
 
                         Dinosaur moveDino = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == nameToMove);
 
@@ -171,7 +171,7 @@ namespace JurassicPark
                         {
                             Console.WriteLine("");
                             Console.ForegroundColor = ConsoleColor.Cyan;
-                            Console.WriteLine($"{moveDino.Name} is currently in {moveDino.EnclosureNumber}.");
+                            Console.WriteLine($"{moveDino.Name} is currently in enclosure {moveDino.EnclosureNumber}.");
                             moveDino.EnclosureNumber = PromptForInteger($"Please list {moveDino.Name}'s new enclosure number: ");
                             Console.WriteLine("");
                         }
