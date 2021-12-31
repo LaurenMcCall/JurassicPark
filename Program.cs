@@ -27,7 +27,7 @@ namespace JurassicPark
             Console.WriteLine();
             Console.WriteLine("🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("  🦕🦖🦕🦖🦕🦖🦕🦖 Welcome to Jurassic Park 🦕🦖🦕🦖🦕🦖🦕🦖  ");
+            Console.WriteLine("  🦕🦖🦕🦖🦕🦖🦕🦖 WELCOME TO JURASSIC PARK 🦕🦖🦕🦖🦕🦖🦕🦖  ");
             Console.WriteLine("🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴");
             Console.WriteLine();
         }
@@ -65,24 +65,49 @@ namespace JurassicPark
             //     - keeps track of my Dinosaurs
             var dinosaurs = new List<Dinosaur>();
 
-            var dino = new Dinosaur();
 
             DisplayGreeting();
 
-            dino.Name = PromptForString("What is your dino's name? ");
-            dino.DietType = PromptForString("Is your dino an (O)mnivore or a (C)arnivore? ");
-            dino.Weight = PromptForInteger("How much does your dino weigh in pounds? ");
-            dino.EnclosureNumber = PromptForInteger("Please assign an enclosure number to your dino: ");
+            var keepGoing = true;
 
-            dinosaurs.Add(dino);
+            while (keepGoing)
+            {
+                // - display menu  
+                Console.WriteLine("");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("PLEASE MAKE A SELECTION: ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("-------------------------------------------");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("(V)IEW dinosaurs in the park ");
+                Console.WriteLine("(A)DD a dinosaur to the park ");
+                Console.WriteLine("(R)EMOVE a dinosaur from the park ");
+                Console.WriteLine("(T)RANSFER a dinosaur to a different enclosure ");
+                Console.WriteLine("(S)UMMARIZE dinosaur diet types ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("(Q)UIT ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("-------------------------------------------");
+                Console.WriteLine("");
+                Console.ForegroundColor = ConsoleColor.White;
+                var choice = Console.ReadLine().ToUpper();
 
-            // var keepGoing = true;
+                if (choice == "Q")
+                {
+                    keepGoing = false;
+                }
+                else
+                {
+                    var dino = new Dinosaur();
 
-            // while (keepGoing)
-            // {
-            //     Console.WriteLine("working");
-            // }
+                    dino.Name = PromptForString("What is your dino's name? ");
+                    dino.DietType = PromptForString("Is your dino an (O)mnivore or a (C)arnivore? ");
+                    dino.Weight = PromptForInteger("How much does your dino weigh in pounds? ");
+                    dino.EnclosureNumber = PromptForInteger("Please assign an enclosure number to your dino: ");
 
+                    dinosaurs.Add(dino);
+                }
+            }
         }
     }
 }
