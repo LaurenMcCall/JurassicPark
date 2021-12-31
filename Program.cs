@@ -1,15 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace JurassicPark
 {
     // create dinosaur class
-    class Dino
+    class Dinosaur
     {
         public string Name { get; set; }
         public string DietType { get; set; }
         public DateTime WhenAcquired { get; set; }
         public int Weight { get; set; }
         public int EnclosureNumber { get; set; }
+
+        //   - method called Description
+        //   - within the Dinosaurs class 
+        //   - prints out description of an individual dinosaur that includes 
+        //     the properties in the Dinosaurs class.
+
     }
 
     class Program
@@ -54,8 +61,20 @@ namespace JurassicPark
 
         static void Main(string[] args)
         {
-            var dino = new Dino();
+            //   - List<Dinosaurs>
+            //     - keeps track of my Dinosaurs
+            var dinosaurs = new List<Dinosaur>();
+
+            var dino = new Dinosaur();
+
             DisplayGreeting();
+
+            dino.Name = PromptForString("What is your dino's name? ");
+            dino.DietType = PromptForString("Is your dino an (O)mnivore or a (C)arnivore? ");
+            dino.Weight = PromptForInteger("How much does your dino weigh in pounds? ");
+            dino.EnclosureNumber = PromptForInteger("Please assign an enclosure number to your dino: ");
+
+            dinosaurs.Add(dino);
 
             // var keepGoing = true;
 
