@@ -131,9 +131,9 @@ namespace JurassicPark
                         break;
 
                     case "R":
-                        var name = PromptForString("What is the name of the dinosaur you'd like to remove? ").ToUpper();
+                        var nameToSearch = PromptForString("What is the name of the dinosaur you'd like to remove? ").ToUpper();
 
-                        Dinosaur foundDino = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == name);
+                        Dinosaur foundDino = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == nameToSearch);
 
                         if (foundDino == null)
                         {
@@ -157,6 +157,24 @@ namespace JurassicPark
                         break;
 
                     case "T":
+                        var nameToMove = PromptForString("What is the name of the dinosaur you'd like to remove? ").ToUpper();
+
+                        Dinosaur moveDino = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == nameToMove);
+
+                        if (moveDino == null)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("");
+                            Console.WriteLine("❗No match found❗");
+                        }
+                        else
+                        {
+                            Console.WriteLine("");
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine($"{moveDino.Name} is currently in {moveDino.EnclosureNumber}.");
+                            moveDino.EnclosureNumber = PromptForInteger($"Please list {moveDino.Name}'s new enclosure number: ");
+                            Console.WriteLine("");
+                        }
                         break;
 
                     case "S":
