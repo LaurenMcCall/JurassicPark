@@ -4,66 +4,11 @@ using System.Linq;
 
 namespace JurassicPark
 {
-    // create dinosaur class
-    class Dinosaur
-    {
-        public string Name { get; set; }
-        public string DietType { get; set; }
-        public DateTime WhenAcquired { get; set; }
-        public int Weight { get; set; }
-        public int EnclosureNumber { get; set; }
-
-        //   - method called Description
-        //   - within the Dinosaurs class 
-        //   - prints out description of an individual dinosaur that includes 
-        //     the properties in the Dinosaurs class.
-        public void DisplayDinosaurs()
-        {
-            Console.WriteLine($"Name: {Name} ");
-            Console.WriteLine($"Diet: {DietType} ");
-            Console.WriteLine($"Acquired: {WhenAcquired} ");
-            Console.WriteLine($"Weight: {Weight} lbs ");
-            Console.WriteLine($"Enclosure #: {EnclosureNumber} ");
-        }
-
-    }
-
-    class DinosaurDatabase
-    {
-        // QUESTION ABOUT THIS...
-        private List<Dinosaur> Dinosaurs { get; set; } = new List<Dinosaur>();
-
-        // METHOD for adding a dino
-        public void AddDinosaur(Dinosaur newDinosaur)
-        {
-            Dinosaurs.Add(newDinosaur);
-        }
-
-        // METHOD for viewing all dinos
-        public List<Dinosaur> ViewAllDinosaurs()
-        {
-            return Dinosaurs;
-        }
-
-        // METHOD for viewing one dino
-        public Dinosaur ViewOneDinosaur(string dinoToFind)
-        {
-            Dinosaur foundDinosaur = Dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name.ToUpper().Contains(dinoToFind.ToUpper()));
-
-            return foundDinosaur;
-        }
-
-        // METHOD for deleting a dino
-        public void RemoveDinosaur(Dinosaur removeDinosaur)
-        {
-            Dinosaurs.Remove(removeDinosaur);
-        }
-    }
-
     class Program
     {
         // - display welcome greeting
         static void DisplayGreeting()
+
         {
             Console.WriteLine();
             Console.WriteLine("🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴🦴");
@@ -105,35 +50,37 @@ namespace JurassicPark
             //   - List<Dinosaurs>
             //     - keeps track of my Dinosaurs
 
-            // var dinosaurs = new List<Dinosaur>();
-            var database = new DinosaurDatabase();
             var dinosaurs = new List<Dinosaur>();
-            {
-                new Dinosaur()
-                {
-                    Name = "TOM",
-                    DietType = "Omnivore",
-                    WhenAcquired = DateTime.Now,
-                    Weight = 422,
-                    EnclosureNumber = 1,
-                };
-                new Dinosaur()
-                {
-                    Name = "SUE",
-                    DietType = "Omnivore",
-                    WhenAcquired = DateTime.Now,
-                    Weight = 1002,
-                    EnclosureNumber = 3,
-                };
-                new Dinosaur()
-                {
-                    Name = "TED",
-                    DietType = "Omnivore",
-                    WhenAcquired = DateTime.Now,
-                    Weight = 16,
-                    EnclosureNumber = 5,
-                };
-            };
+            // var database = new DinosaurDatabase();
+
+            // SAMPLE DATA that doesn't work
+            // var dinosaurs = new List<Dinosaur>();
+            // {
+            //     new Dinosaur()
+            //     {
+            //         Name = "TOM",
+            //         DietType = "Omnivore",
+            //         WhenAcquired = DateTime.Now,
+            //         Weight = 422,
+            //         EnclosureNumber = 1,
+            //     };
+            //     new Dinosaur()
+            //     {
+            //         Name = "SUE",
+            //         DietType = "Omnivore",
+            //         WhenAcquired = DateTime.Now,
+            //         Weight = 1002,
+            //         EnclosureNumber = 3,
+            //     };
+            //     new Dinosaur()
+            //     {
+            //         Name = "TED",
+            //         DietType = "Omnivore",
+            //         WhenAcquired = DateTime.Now,
+            //         Weight = 16,
+            //         EnclosureNumber = 5,
+            //     };
+            // };
 
 
             DisplayGreeting();
@@ -165,27 +112,46 @@ namespace JurassicPark
                 switch (choice)
                 {
                     case "V":
-                        ViewAllDinosaurs(database);
+                        // ViewAllDinosaurs(database);
                         // - if (V) IEW is selected:
                         //   - would you like to see the dinosaurs in Name or EnclosureNumber order?
-                        // var howToView = PromptForString("Would you like to view the dinosaurs by (N)AME or (E)NCLOSURE NUMBER? ").ToUpper();
-                        // if (howToView == "N")
-                        // {
-                        //     //     - (if Name) print out Dinos by Name
-                        //     var viewByName = dinosaurs.OrderBy(dinosaur => dinosaur.Name);
+                        var howToView = PromptForString("Would you like to view the dinosaurs by (N)AME or (E)NCLOSURE NUMBER? ").ToUpper();
+                        if (howToView == "N")
+                        {
+                            foreach (var viewDino in dinosaurs)
+                            {
+                                Console.WriteLine($"Name: {viewDino.Name} ");
+                                Console.WriteLine($"Diet: {viewDino.DietType} ");
+                                Console.WriteLine($"Acquired: {viewDino.WhenAcquired} ");
+                                Console.WriteLine($"Weight: {viewDino.Weight} lbs ");
+                                Console.WriteLine($"Enclosure #: {viewDino.EnclosureNumber} ");
+                                Console.WriteLine("");
+                            }
 
+                            //     - (if Name) print out Dinos by Name
+                            // var viewByName = dinosaurs.OrderBy(dinosaur => dinosaur.Name);
 
-                        //     Console.WriteLine("");
-                        //     Console.WriteLine($"{viewByName}");
-                        // }
-                        // else
-                        // {
-                        //     if (howToView == "E")
-                        //     {
-                        //         //     - (if EnclosureNumber) print out Dinos by EnclosureNumber
+                            // Console.WriteLine("");
+                            // Console.WriteLine($"{viewByName}");
+                        }
+                        else if (howToView == "E")
+                        {
+                            foreach (var viewDino in dinosaurs)
+                            {
+                                Console.WriteLine($"Name: {viewDino.Name} ");
+                                Console.WriteLine($"Diet: {viewDino.DietType} ");
+                                Console.WriteLine($"Acquired: {viewDino.WhenAcquired} ");
+                                Console.WriteLine($"Weight: {viewDino.Weight} lbs ");
+                                Console.WriteLine($"Enclosure #: {viewDino.EnclosureNumber} ");
+                                Console.WriteLine("");
+                            }
 
-                        //     }
-                        // }
+                        }
+                        else
+                        {
+
+                        }
+
                         //     - (if there are no dinos in park) "I'm sorry, our park is only full of dino 
                         // eggs right now. Check by once they've hatched"
 
