@@ -13,11 +13,13 @@ namespace JurassicPark
 
         public void DisplayDinosaurs()
         {
+            Console.WriteLine("");
             Console.WriteLine($"Name: {Name} ");
             Console.WriteLine($"Diet: {DietType} ");
             Console.WriteLine($"Acquired: {WhenAcquired} ");
             Console.WriteLine($"Weight: {Weight} lbs ");
             Console.WriteLine($"Enclosure #: {EnclosureNumber} ");
+            Console.WriteLine("");
         }
     }
 }

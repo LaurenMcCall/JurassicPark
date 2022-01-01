@@ -112,23 +112,26 @@ namespace JurassicPark
                 switch (choice)
                 {
                     case "V":
-                        // ViewAllDinosaurs(database);
-                        // - if (V) IEW is selected:
-                        //   - would you like to see the dinosaurs in Name or EnclosureNumber order?
+                        // NEED TO FIX SORTING BY NAME OR ENCLOSURE NUMBER
+                        // AND DISPLAY ERROR IF NO DINOS IN THE PARK
+                        Console.WriteLine("");
                         var howToView = PromptForString("Would you like to view the dinosaurs by (N)AME or (E)NCLOSURE NUMBER? ").ToUpper();
-                        if (howToView == "N")
+
+                        // var viewByName = dinosaurs.OrderBy(dinosaur => dinosaur.Name);
+                        Dinosaur viewByName = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == howToView);
+                        if (dinosaurs == null)
+                        {
+                            Console.WriteLine("There are no dinos in the park, just dino eggs. Check again once they've hatched 🐣 ");
+                        }
+                        else if (howToView == "N")
                         {
                             foreach (var viewDino in dinosaurs)
                             {
-                                Console.WriteLine($"Name: {viewDino.Name} ");
-                                Console.WriteLine($"Diet: {viewDino.DietType} ");
-                                Console.WriteLine($"Acquired: {viewDino.WhenAcquired} ");
-                                Console.WriteLine($"Weight: {viewDino.Weight} lbs ");
-                                Console.WriteLine($"Enclosure #: {viewDino.EnclosureNumber} ");
-                                Console.WriteLine("");
+                                viewDino.DisplayDinosaurs();
                             }
 
-                            //     - (if Name) print out Dinos by Name
+                            // POSSIBLE LINQ FOR SEARCHING BY NAME (currently does not work):
+
                             // var viewByName = dinosaurs.OrderBy(dinosaur => dinosaur.Name);
 
                             // Console.WriteLine("");
@@ -138,38 +141,42 @@ namespace JurassicPark
                         {
                             foreach (var viewDino in dinosaurs)
                             {
-                                Console.WriteLine($"Name: {viewDino.Name} ");
-                                Console.WriteLine($"Diet: {viewDino.DietType} ");
-                                Console.WriteLine($"Acquired: {viewDino.WhenAcquired} ");
-                                Console.WriteLine($"Weight: {viewDino.Weight} lbs ");
-                                Console.WriteLine($"Enclosure #: {viewDino.EnclosureNumber} ");
-                                Console.WriteLine("");
+                                viewDino.DisplayDinosaurs();
                             }
-
                         }
                         else
                         {
-
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("");
+                            Console.WriteLine("❗That is not a valid selection. Try again❗");
+                            Console.WriteLine("");
                         }
-
-                        //     - (if there are no dinos in park) "I'm sorry, our park is only full of dino 
-                        // eggs right now. Check by once they've hatched"
-
                         break;
 
                     case "A":
                         var dino = new Dinosaur();
 
+                        Console.WriteLine("");
                         dino.Name = PromptForString("What is your dino's name? ").ToUpper();
                         dino.DietType = PromptForString("Is your dino an (O)mnivore or a (C)arnivore? ").ToUpper();
+                        if (dino.DietType == "O")
+                        {
+                            dino.DietType = "Omnivore";
+                        }
+                        else if (dino.DietType == "C")
+                        {
+                            dino.DietType = "Carnivore";
+                        }
                         dino.WhenAcquired = DateTime.Now;
                         dino.Weight = PromptForInteger("How much does your dino weigh in pounds? ");
                         dino.EnclosureNumber = PromptForInteger("Please assign an enclosure number to your dino: ");
+                        Console.WriteLine("");
 
                         dinosaurs.Add(dino);
                         break;
 
                     case "R":
+                        Console.WriteLine("");
                         var nameToSearch = PromptForString("What is the name of the dinosaur you'd like to remove? ").ToUpper();
 
                         Dinosaur foundDino = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == nameToSearch);
@@ -179,6 +186,8 @@ namespace JurassicPark
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("");
                             Console.WriteLine("❗No match found❗");
+                            Console.WriteLine("");
+
                         }
                         else
                         {
@@ -196,6 +205,7 @@ namespace JurassicPark
                         break;
 
                     case "T":
+                        Console.WriteLine("");
                         var nameToMove = PromptForString("What is the name of the dinosaur you'd like to transfer? ").ToUpper();
 
                         Dinosaur moveDino = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == nameToMove);
@@ -217,6 +227,7 @@ namespace JurassicPark
                         break;
 
                     case "S":
+
                         break;
 
                     case "Q":
