@@ -72,7 +72,7 @@ namespace JurassicPark
             //     - keeps track of my Dinosaurs
             var dinosaurs = new List<Dinosaur>();
 
-            var database = new DinosaurDatabase();
+            // var database = new DinosaurDatabase();
 
             DisplayGreeting();
 
@@ -113,7 +113,6 @@ namespace JurassicPark
                                 viewDino.DisplayDinosaurs();
                             }
                         }
-
                         // }
                         // else if (howToView == "E")
                         // {
@@ -129,10 +128,10 @@ namespace JurassicPark
 
                         Console.WriteLine("");
                         dino.Name = PromptForString("What is your dino's name? ").ToUpper();
-                        dino.DietType = PromptForString("Is your dino an (O)mnivore or a (C)arnivore? ").ToUpper();
-                        if (dino.DietType == "O")
+                        dino.DietType = PromptForString("Is your dino an (H)erbivore or a (C)arnivore? ").ToUpper();
+                        if (dino.DietType == "H")
                         {
-                            dino.DietType = "Omnivore";
+                            dino.DietType = "Herbivore";
                         }
                         else if (dino.DietType == "C")
                         {
@@ -198,7 +197,25 @@ namespace JurassicPark
                         break;
 
                     case "S":
-
+                        // count number of herbivores in dinosaurs list
+                        var numberOfHerbivores = dinosaurs.Count(herbivores => herbivores.DietType == "Herbivore");
+                        // count number of carnivores in dinosaurs list
+                        var numberOfCarnivores = dinosaurs.Count(carnivores => carnivores.DietType == "Carnivore");
+                        // display error if no dinos in park
+                        if (dinosaurs.Count == 0)
+                        {
+                            Console.WriteLine("");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("There are no dinos in the park, just dino eggs. Check back again once they've hatched 🐣 ");
+                        }
+                        // display counts of herbs and carns to user.
+                        else if (numberOfHerbivores > 0 || numberOfCarnivores > 0)
+                        {
+                            Console.WriteLine("");
+                            Console.WriteLine("Here is a breakdown of our dinosaurs by diet types: ");
+                            Console.WriteLine($"Herbivores: {numberOfHerbivores} ");
+                            Console.WriteLine($"Carnivores: {numberOfCarnivores} ");
+                        }
                         break;
 
                     case "Q":
