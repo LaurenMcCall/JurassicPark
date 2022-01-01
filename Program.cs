@@ -72,7 +72,7 @@ namespace JurassicPark
             //     - keeps track of my Dinosaurs
             var dinosaurs = new List<Dinosaur>();
 
-            // var database = new DinosaurDatabase();
+            var database = new DinosaurDatabase();
 
             DisplayGreeting();
 
@@ -100,9 +100,7 @@ namespace JurassicPark
                         // if (!dinosaurs.Any())
                         if (dinosaurs.Count == 0)
                         {
-                            Console.WriteLine("");
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine("There are no dinos in the park, just dino eggs. Check back again once they've hatched 🐣 ");
+                            database.NoDinosInTheParkMessage();
                         }
                         else
                         {
@@ -127,6 +125,7 @@ namespace JurassicPark
                         var dino = new Dinosaur();
 
                         Console.WriteLine("");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         dino.Name = PromptForString("What is your dino's name? ").ToUpper();
                         dino.DietType = PromptForString("Is your dino an (H)erbivore or a (C)arnivore? ").ToUpper();
                         if (dino.DietType == "H")
@@ -159,19 +158,17 @@ namespace JurassicPark
                         var nameToSearch = PromptForString("What is the name of the dinosaur you'd like to remove? ").ToUpper();
 
                         Dinosaur foundDino = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == nameToSearch);
+                        if (dinosaurs.Count < 1)
+                        {
+                            database.NoDinosInTheParkMessage();
+                        }
 
-                        if (foundDino == null)
+                        // WHY ISN'T THIS SHOWING UP WHEN THERE ARE NO DINOs IN THE LIST?
+                        else if (foundDino == null)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("");
                             Console.WriteLine("❗No match found❗");
-                        }
-                        // WHY ISN'T THIS SHOWING UP WHEN THERE ARE NO DINOs IN THE LIST?
-                        else if (dinosaurs.Count == 0)
-                        {
-                            Console.WriteLine("");
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine("There are no dinos in the park, just dino eggs. Check back again once they've hatched 🐣 ");
                         }
                         else
                         {
@@ -206,7 +203,6 @@ namespace JurassicPark
                             Console.WriteLine("");
                             Console.ForegroundColor = ConsoleColor.Cyan;
                             Console.WriteLine($"{moveDino.Name} is currently in enclosure {moveDino.EnclosureNumber}.");
-                            Console.ForegroundColor = ConsoleColor.White;
                             moveDino.EnclosureNumber = PromptForInteger($"Please list {moveDino.Name}'s new enclosure number: ");
                             Console.WriteLine("");
                         }
@@ -220,9 +216,7 @@ namespace JurassicPark
                         // display error if no dinos in park
                         if (dinosaurs.Count == 0)
                         {
-                            Console.WriteLine("");
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine("There are no dinos in the park, just dino eggs. Check back again once they've hatched 🐣 ");
+                            database.NoDinosInTheParkMessage();
                         }
                         // display counts of herbs and carns to user.
                         else if (numberOfHerbivores > 0 || numberOfCarnivores > 0)
@@ -251,8 +245,4 @@ namespace JurassicPark
     }
 }
 
-// ALGORITHM
 
-
-// - if (S)UMMARY is selected:
-//   - will display the number of carnivores and herbivores in the park list. 

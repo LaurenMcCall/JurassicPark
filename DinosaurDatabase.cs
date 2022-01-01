@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace JurassicPark
@@ -27,7 +28,14 @@ namespace JurassicPark
         {
             Dinosaurs.Remove(removeDinosaur);
         }
+        public void NoDinosInTheParkMessage()
+        {
+            Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("There are no dinos in the park, just dino eggs. Check back again once they've hatched 🐣 ");
+        }
     }
+
 }
 
 // ALGORITHM
