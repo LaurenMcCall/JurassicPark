@@ -140,6 +140,14 @@ namespace JurassicPark
                         dino.WhenAcquired = DateTime.Now;
                         dino.Weight = PromptForInteger("How much does your dino weigh in pounds? ");
                         dino.EnclosureNumber = PromptForInteger("Please assign an enclosure number to your dino: ");
+
+                        // WANT TO PROMPT USER TO INPUT NEW NUMBER IF ENCLOSURE IS ALREADY TAKEN
+
+                        // bool enclosureNumberAlreadyAssigned = dinosaurs.Any(cageNumber => cageNumber.EnclosureNumber == dino.EnclosureNumber);
+                        // if (enclosureNumberAlreadyAssigned == true)
+                        // {
+                        //     Console.WriteLine("That enclosure number has already been assigned. Please input another one. ");
+                        // }
                         Console.WriteLine("");
 
                         dinosaurs.Add(dino);
@@ -147,6 +155,7 @@ namespace JurassicPark
 
                     case "R":
                         Console.WriteLine("");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         var nameToSearch = PromptForString("What is the name of the dinosaur you'd like to remove? ").ToUpper();
 
                         Dinosaur foundDino = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == nameToSearch);
@@ -156,12 +165,18 @@ namespace JurassicPark
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("");
                             Console.WriteLine("❗No match found❗");
+                        }
+                        // WHY ISN'T THIS SHOWING UP WHEN THERE ARE NO DINOs IN THE LIST?
+                        else if (dinosaurs.Count == 0)
+                        {
                             Console.WriteLine("");
-
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("There are no dinos in the park, just dino eggs. Check back again once they've hatched 🐣 ");
                         }
                         else
                         {
                             Console.WriteLine("");
+                            Console.ForegroundColor = ConsoleColor.Cyan;
                             var confirmRemoval = PromptForString($"Are you sure you want to remove {foundDino.Name} from the park? (Y)ES or (N)O ").ToUpper();
                             if (confirmRemoval == "Y")
                             {
@@ -191,6 +206,7 @@ namespace JurassicPark
                             Console.WriteLine("");
                             Console.ForegroundColor = ConsoleColor.Cyan;
                             Console.WriteLine($"{moveDino.Name} is currently in enclosure {moveDino.EnclosureNumber}.");
+                            Console.ForegroundColor = ConsoleColor.White;
                             moveDino.EnclosureNumber = PromptForInteger($"Please list {moveDino.Name}'s new enclosure number: ");
                             Console.WriteLine("");
                         }
@@ -212,9 +228,11 @@ namespace JurassicPark
                         else if (numberOfHerbivores > 0 || numberOfCarnivores > 0)
                         {
                             Console.WriteLine("");
+                            Console.ForegroundColor = ConsoleColor.Cyan;
                             Console.WriteLine("Here is a breakdown of our dinosaurs by diet types: ");
-                            Console.WriteLine($"Herbivores: {numberOfHerbivores} ");
-                            Console.WriteLine($"Carnivores: {numberOfCarnivores} ");
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine($"🍃 Herbivores: {numberOfHerbivores} ");
+                            Console.WriteLine($"🍖 Carnivores: {numberOfCarnivores} ");
                         }
                         break;
 

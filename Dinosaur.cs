@@ -14,7 +14,9 @@ namespace JurassicPark
         public void DisplayDinosaurs()
         {
             Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine($"Name: {Name} ");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine($"Diet: {DietType} ");
             Console.WriteLine($"Acquired: {WhenAcquired} ");
             Console.WriteLine($"Weight: {Weight} lbs ");
