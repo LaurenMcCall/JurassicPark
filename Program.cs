@@ -24,7 +24,7 @@ namespace JurassicPark
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("PLEASE MAKE A SELECTION: ");
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine("-----------------------------------------------");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("(V)IEW dinosaurs in the park ");
             Console.WriteLine("(A)DD a dinosaur to the park ");
@@ -34,7 +34,7 @@ namespace JurassicPark
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("(Q)UIT ");
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine("-----------------------------------------------");
             Console.WriteLine("");
             Console.ForegroundColor = ConsoleColor.White;
         }
@@ -72,36 +72,7 @@ namespace JurassicPark
             //     - keeps track of my Dinosaurs
             var dinosaurs = new List<Dinosaur>();
 
-            // var database = new DinosaurDatabase();
-
-            // SAMPLE DATA that doesn't work
-            // var dinosaurs = new List<Dinosaur>();
-            // {
-            //     new Dinosaur()
-            //     {
-            //         Name = "TOM",
-            //         DietType = "Omnivore",
-            //         WhenAcquired = DateTime.Now,
-            //         Weight = 422,
-            //         EnclosureNumber = 1,
-            //     };
-            //     new Dinosaur()
-            //     {
-            //         Name = "SUE",
-            //         DietType = "Omnivore",
-            //         WhenAcquired = DateTime.Now,
-            //         Weight = 1002,
-            //         EnclosureNumber = 3,
-            //     };
-            //     new Dinosaur()
-            //     {
-            //         Name = "TED",
-            //         DietType = "Omnivore",
-            //         WhenAcquired = DateTime.Now,
-            //         Weight = 16,
-            //         EnclosureNumber = 5,
-            //     };
-            // };
+            var database = new DinosaurDatabase();
 
             DisplayGreeting();
 
@@ -119,43 +90,38 @@ namespace JurassicPark
                     case "V":
                         // NEED TO FIX SORTING BY NAME OR ENCLOSURE NUMBER
                         // AND DISPLAY ERROR IF NO DINOS IN THE PARK
-                        Console.WriteLine("");
-                        var howToView = PromptForString("Would you like to view the dinosaurs by (N)AME or (E)NCLOSURE NUMBER? ").ToUpper();
+                        // Console.WriteLine("");
+                        // var howToView = PromptForString("Would you like to view the dinosaurs by (N)AME or (E)NCLOSURE NUMBER? ").ToUpper();
 
-                        // var viewByName = dinosaurs.OrderBy(dinosaur => dinosaur.Name);
-                        Dinosaur viewByName = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == howToView);
-                        if (dinosaurs == null)
+                        // // Dinosaur viewByName = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == howToView);
+
+                        // else if (howToView == "N")
+                        // {
+                        // if (!dinosaurs.Any())
+                        if (dinosaurs.Count == 0)
                         {
-                            Console.WriteLine("There are no dinos in the park, just dino eggs. Check again once they've hatched 🐣 ");
-                        }
-                        else if (howToView == "N")
-                        {
-                            foreach (var viewDino in dinosaurs)
-                            {
-                                viewDino.DisplayDinosaurs();
-                            }
-
-                            // POSSIBLE LINQ FOR SEARCHING BY NAME (currently does not work):
-
-                            // var viewByName = dinosaurs.OrderBy(dinosaur => dinosaur.Name);
-
-                            // Console.WriteLine("");
-                            // Console.WriteLine($"{viewByName}");
-                        }
-                        else if (howToView == "E")
-                        {
-                            foreach (var viewDino in dinosaurs)
-                            {
-                                viewDino.DisplayDinosaurs();
-                            }
+                            Console.WriteLine("");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("There are no dinos in the park, just dino eggs. Check back again once they've hatched 🐣 ");
                         }
                         else
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("");
-                            Console.WriteLine("❗That is not a valid selection. Try again❗");
-                            Console.WriteLine("");
+                            foreach (var viewDino in dinosaurs)
+                            {
+                                // POSSIBLE LINQ FOR SEARCHING BY NAME (currently does not work):
+                                // var viewByName = dinosaurs.OrderBy(dinosaur => dinosaur.Name);
+                                viewDino.DisplayDinosaurs();
+                            }
                         }
+
+                        // }
+                        // else if (howToView == "E")
+                        // {
+                        //     foreach (var viewDino in dinosaurs)
+                        //     {
+                        //         viewDino.DisplayDinosaurs();
+                        //     }
+                        // }
                         break;
 
                     case "A":
