@@ -18,6 +18,27 @@ namespace JurassicPark
             Console.WriteLine();
         }
 
+        static void DisplayMenu()
+        {
+            Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("PLEASE MAKE A SELECTION: ");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("-------------------------------------------");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("(V)IEW dinosaurs in the park ");
+            Console.WriteLine("(A)DD a dinosaur to the park ");
+            Console.WriteLine("(R)EMOVE a dinosaur from the park ");
+            Console.WriteLine("(T)RANSFER a dinosaur to a different enclosure ");
+            Console.WriteLine("(S)UMMARIZE dinosaur diet types ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("(Q)UIT ");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
         // prompt for string method
         static string PromptForString(string prompt)
         {
@@ -49,8 +70,8 @@ namespace JurassicPark
         {
             //   - List<Dinosaurs>
             //     - keeps track of my Dinosaurs
-
             var dinosaurs = new List<Dinosaur>();
+
             // var database = new DinosaurDatabase();
 
             // SAMPLE DATA that doesn't work
@@ -82,7 +103,6 @@ namespace JurassicPark
             //     };
             // };
 
-
             DisplayGreeting();
 
             var keepGoing = true;
@@ -90,23 +110,8 @@ namespace JurassicPark
             while (keepGoing)
             {
                 // - display menu  
-                Console.WriteLine("");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("PLEASE MAKE A SELECTION: ");
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("-------------------------------------------");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("(V)IEW dinosaurs in the park ");
-                Console.WriteLine("(A)DD a dinosaur to the park ");
-                Console.WriteLine("(R)EMOVE a dinosaur from the park ");
-                Console.WriteLine("(T)RANSFER a dinosaur to a different enclosure ");
-                Console.WriteLine("(S)UMMARIZE dinosaur diet types ");
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("(Q)UIT ");
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("-------------------------------------------");
-                Console.WriteLine("");
-                Console.ForegroundColor = ConsoleColor.White;
+                DisplayMenu();
+
                 var choice = Console.ReadLine().ToUpper();
 
                 switch (choice)
