@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using CsvHelper;
+using CsvHelper.Configuration;
 
 namespace JurassicPark
 {
@@ -73,9 +74,13 @@ namespace JurassicPark
         {
             //   - List<Dinosaurs>
             //     - keeps track of my Dinosaurs
+
+
             var dinosaurs = new List<Dinosaur>();
 
             var database = new DinosaurDatabase();
+
+            database.LoadDinosaurs();
 
             DisplayGreeting();
 
@@ -240,13 +245,7 @@ namespace JurassicPark
                 }
             }
 
-            var fileWriter = new StreamWriter("dinosaur.csv");
-
-            var csvWriter = new CsvWriter(fileWriter, CultureInfo.InvariantCulture);
-
-            csvWriter.WriteRecords(dinosaurs);
-
-            fileWriter.Close();
+            database.SaveDinosaurs();
         }
     }
 }

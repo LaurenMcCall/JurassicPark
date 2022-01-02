@@ -20,6 +20,15 @@ namespace JurassicPark
             Dinosaurs.Remove(removeDinosaur);
         }
 
+        public void LoadDinosaurs()
+        {
+
+        }
+
+        public void SaveDinosaurs()
+        {
+
+        }
         // public void ViewDinosInThePark()
         // {
 
