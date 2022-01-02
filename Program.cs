@@ -88,37 +88,38 @@ namespace JurassicPark
                 switch (choice)
                 {
                     case "V":
-                        // NEED TO FIX SORTING BY NAME OR ENCLOSURE NUMBER
-                        // AND DISPLAY ERROR IF NO DINOS IN THE PARK
-                        // Console.WriteLine("");
-                        // var howToView = PromptForString("Would you like to view the dinosaurs by (N)AME or (E)NCLOSURE NUMBER? ").ToUpper();
+                        database.ViewDinosInThePark();
+                        // // NEED TO FIX SORTING BY NAME OR ENCLOSURE NUMBER
+                        // // AND DISPLAY ERROR IF NO DINOS IN THE PARK
+                        // // Console.WriteLine("");
+                        // // var howToView = PromptForString("Would you like to view the dinosaurs by (N)AME or (E)NCLOSURE NUMBER? ").ToUpper();
 
-                        // // Dinosaur viewByName = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == howToView);
+                        // // // Dinosaur viewByName = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == howToView);
 
-                        // else if (howToView == "N")
+                        // // else if (howToView == "N")
+                        // // {
+                        // // if (!dinosaurs.Any())
+                        // if (dinosaurs.Count == 0)
                         // {
-                        // if (!dinosaurs.Any())
-                        if (dinosaurs.Count == 0)
-                        {
-                            database.NoDinosInTheParkMessage();
-                        }
-                        else
-                        {
-                            foreach (var viewDino in dinosaurs)
-                            {
-                                // POSSIBLE LINQ FOR SEARCHING BY NAME (currently does not work):
-                                // var viewByName = dinosaurs.OrderBy(dinosaur => dinosaur.Name);
-                                viewDino.DisplayDinosaurs();
-                            }
-                        }
+                        //     database.NoDinosInTheParkMessage();
                         // }
-                        // else if (howToView == "E")
+                        // else
                         // {
                         //     foreach (var viewDino in dinosaurs)
                         //     {
+                        //         // POSSIBLE LINQ FOR SEARCHING BY NAME (currently does not work):
+                        //         // var viewByName = dinosaurs.OrderBy(dinosaur => dinosaur.Name);
                         //         viewDino.DisplayDinosaurs();
                         //     }
                         // }
+                        // // }
+                        // // else if (howToView == "E")
+                        // // {
+                        // //     foreach (var viewDino in dinosaurs)
+                        // //     {
+                        // //         viewDino.DisplayDinosaurs();
+                        // //     }
+                        // // }
                         break;
 
                     case "A":
@@ -160,7 +161,7 @@ namespace JurassicPark
                         Dinosaur foundDino = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == nameToSearch);
                         if (dinosaurs.Count < 1)
                         {
-                            database.NoDinosInTheParkMessage();
+                            DinosaurDatabase.NoDinosInTheParkMessage();
                         }
 
                         // WHY ISN'T THIS SHOWING UP WHEN THERE ARE NO DINOs IN THE LIST?
@@ -216,7 +217,7 @@ namespace JurassicPark
                         // display error if no dinos in park
                         if (dinosaurs.Count == 0)
                         {
-                            database.NoDinosInTheParkMessage();
+                            DinosaurDatabase.NoDinosInTheParkMessage();
                         }
                         // display counts of herbs and carns to user.
                         else if (numberOfHerbivores > 0 || numberOfCarnivores > 0)

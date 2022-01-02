@@ -8,19 +8,10 @@ namespace JurassicPark
         // QUESTION ABOUT THIS...
         private List<Dinosaur> Dinosaurs { get; set; } = new List<Dinosaur>();
 
-        // METHOD for adding a dino
-        public void AddDinosaur(Dinosaur newDinosaur)
-        {
-            Dinosaurs.Add(newDinosaur);
-        }
-
-        // // METHOD for viewing all dinos
-        // public void ViewDinosaurs(List<Dinosaur> dinosaurs)
+        // // METHOD for adding a dino
+        // public void AddDinosaur(Dinosaur newDinosaur)
         // {
-        //     foreach (var dino in dinosaurs)
-        //     {
-        //         DisplayDinosaurs();
-        //     }
+        //     Dinosaurs.Add(newDinosaur);
         // }
 
         // METHOD for deleting a dino
@@ -28,18 +19,44 @@ namespace JurassicPark
         {
             Dinosaurs.Remove(removeDinosaur);
         }
-        public void NoDinosInTheParkMessage()
+
+        public void ViewDinosInThePark()
+        {
+            // NEED TO FIX SORTING BY NAME OR ENCLOSURE NUMBER
+            // AND DISPLAY ERROR IF NO DINOS IN THE PARK
+
+            // var howToView = PromptForString("Would you like to view the dinosaurs by (N)AME or (E)NCLOSURE NUMBER? ").ToUpper();
+            // Dinosaur viewByName = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == howToView);
+            // else if (howToView == "N")
+            if (Dinosaurs.Count == 0)
+            {
+                DinosaurDatabase.NoDinosInTheParkMessage();
+            }
+            else
+            {
+                foreach (var viewDino in Dinosaurs)
+                {
+                    // POSSIBLE LINQ FOR SEARCHING BY NAME (currently does not work):
+                    // var viewByName = dinosaurs.OrderBy(dinosaur => dinosaur.Name);
+                    viewDino.DisplayDinosaurs();
+                }
+            }
+            // }
+            // else if (howToView == "E")
+            // {
+            //     foreach (var viewDino in dinosaurs)
+            //     {
+            //         viewDino.DisplayDinosaurs();
+            //     }
+            // }
+        }
+        public static void NoDinosInTheParkMessage()
         {
             Console.WriteLine("");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("There are no dinos in the park, just dino eggs. Check back again once they've hatched 🐣 ");
         }
+
     }
 
 }
-
-// ALGORITHM
-
-
-// - if (S)UMMARY is selected:
-//   - will display the number of carnivores and herbivores in the park list. 
