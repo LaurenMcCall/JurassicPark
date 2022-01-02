@@ -41,6 +41,7 @@ namespace JurassicPark
                     viewDino.DisplayDinosaurs();
                 }
             }
+
             // }
             // else if (howToView == "E")
             // {
