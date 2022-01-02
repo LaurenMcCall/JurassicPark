@@ -88,58 +88,48 @@ namespace JurassicPark
                 switch (choice)
                 {
                     case "V":
-                        // database.ViewDinosInThePark();
-                        // NEED TO FIX SORTING BY NAME OR ENCLOSURE NUMBER
-                        // AND DISPLAY ERROR IF NO DINOS IN THE PARK
-                        // Console.WriteLine("");
-                        // var howToView = PromptForString("Would you like to view the dinosaurs by (N)AME or (E)NCLOSURE NUMBER? ").ToUpper();
+                        var userViewPreference = PromptForString("Would you like to view the dinosaurs by (N)AME or (E)NCLOSURE NUMBER? ").ToUpper();
+                        var viewByName = dinosaurs.OrderBy(dinosaur => dinosaur.Name);
+                        var viewByEnclosureNumber = dinosaurs.OrderBy(dinosaur => dinosaur.EnclosureNumber);
 
-                        // // Dinosaur viewByName = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == howToView);
-
-                        // else if (howToView == "N")
-                        // {
-                        // if (!dinosaurs.Any())
                         if (dinosaurs.Count == 0)
                         {
                             DinosaurDatabase.NoDinosInTheParkMessage();
                         }
-                        else
+                        else if (userViewPreference == "N")
                         {
-                            foreach (var viewDino in dinosaurs)
+                            foreach (var viewDino in viewByName)
                             {
-                                // POSSIBLE LINQ FOR SEARCHING BY NAME (currently does not work):
-                                // var viewByName = dinosaurs.OrderBy(dinosaur => dinosaur.Name);
                                 viewDino.DisplayDinosaurs();
                             }
                         }
-                        // }
-                        // else if (howToView == "E")
-                        // {
-                        //     foreach (var viewDino in dinosaurs)
-                        //     {
-                        //         viewDino.DisplayDinosaurs();
-                        //     }
-                        // }
+                        else if (userViewPreference == "E")
+                        {
+                            foreach (var viewDino in viewByEnclosureNumber)
+                            {
+                                viewDino.DisplayDinosaurs();
+                            }
+                        }
                         break;
 
                     case "A":
-                        var dino = new Dinosaur();
+                        var addDino = new Dinosaur();
 
                         Console.WriteLine("");
                         Console.ForegroundColor = ConsoleColor.Cyan;
-                        dino.Name = PromptForString("What is your dino's name? ").ToUpper();
-                        dino.DietType = PromptForString("Is your dino an (H)erbivore or a (C)arnivore? ").ToUpper();
-                        if (dino.DietType == "H")
+                        addDino.Name = PromptForString("What is your dino's name? ").ToUpper();
+                        addDino.DietType = PromptForString("Is your dino an (H)erbivore or a (C)arnivore? ").ToUpper();
+                        if (addDino.DietType == "H")
                         {
-                            dino.DietType = "Herbivore";
+                            addDino.DietType = "Herbivore";
                         }
-                        else if (dino.DietType == "C")
+                        else if (addDino.DietType == "C")
                         {
-                            dino.DietType = "Carnivore";
+                            addDino.DietType = "Carnivore";
                         }
-                        dino.WhenAcquired = DateTime.Now;
-                        dino.Weight = PromptForInteger("How much does your dino weigh in pounds? ");
-                        dino.EnclosureNumber = PromptForInteger("Please assign an enclosure number to your dino: ");
+                        addDino.WhenAcquired = DateTime.Now;
+                        addDino.Weight = PromptForInteger("How much does your dino weigh in pounds? ");
+                        addDino.EnclosureNumber = PromptForInteger("Please assign an enclosure number to your dino: ");
 
                         // WANT TO PROMPT USER TO INPUT NEW NUMBER IF ENCLOSURE IS ALREADY TAKEN
 
@@ -150,7 +140,7 @@ namespace JurassicPark
                         // }
                         Console.WriteLine("");
 
-                        dinosaurs.Add(dino);
+                        dinosaurs.Add(addDino);
                         break;
 
                     case "R":
