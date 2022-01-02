@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using CsvHelper;
 
 namespace JurassicPark
 {
@@ -236,6 +239,14 @@ namespace JurassicPark
                         break;
                 }
             }
+
+            var fileWriter = new StreamWriter("dinosaur.csv");
+
+            var csvWriter = new CsvWriter(fileWriter, CultureInfo.InvariantCulture);
+
+            csvWriter.WriteRecords(dinosaurs);
+
+            fileWriter.Close();
         }
     }
 }
