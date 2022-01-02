@@ -183,7 +183,11 @@ namespace JurassicPark
 
                         Dinosaur moveDino = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == nameToMove);
 
-                        if (moveDino == null)
+                        if (dinosaurs.Count < 1)
+                        {
+                            DinosaurDatabase.NoDinosInTheParkMessage();
+                        }
+                        else if (moveDino == null)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("");
