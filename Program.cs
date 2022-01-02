@@ -88,38 +88,38 @@ namespace JurassicPark
                 switch (choice)
                 {
                     case "V":
-                        database.ViewDinosInThePark();
-                        // // NEED TO FIX SORTING BY NAME OR ENCLOSURE NUMBER
-                        // // AND DISPLAY ERROR IF NO DINOS IN THE PARK
-                        // // Console.WriteLine("");
-                        // // var howToView = PromptForString("Would you like to view the dinosaurs by (N)AME or (E)NCLOSURE NUMBER? ").ToUpper();
+                        // database.ViewDinosInThePark();
+                        // NEED TO FIX SORTING BY NAME OR ENCLOSURE NUMBER
+                        // AND DISPLAY ERROR IF NO DINOS IN THE PARK
+                        // Console.WriteLine("");
+                        // var howToView = PromptForString("Would you like to view the dinosaurs by (N)AME or (E)NCLOSURE NUMBER? ").ToUpper();
 
-                        // // // Dinosaur viewByName = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == howToView);
+                        // // Dinosaur viewByName = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == howToView);
 
-                        // // else if (howToView == "N")
-                        // // {
-                        // // if (!dinosaurs.Any())
-                        // if (dinosaurs.Count == 0)
+                        // else if (howToView == "N")
                         // {
-                        //     database.NoDinosInTheParkMessage();
+                        // if (!dinosaurs.Any())
+                        if (dinosaurs.Count == 0)
+                        {
+                            DinosaurDatabase.NoDinosInTheParkMessage();
+                        }
+                        else
+                        {
+                            foreach (var viewDino in dinosaurs)
+                            {
+                                // POSSIBLE LINQ FOR SEARCHING BY NAME (currently does not work):
+                                // var viewByName = dinosaurs.OrderBy(dinosaur => dinosaur.Name);
+                                viewDino.DisplayDinosaurs();
+                            }
+                        }
                         // }
-                        // else
+                        // else if (howToView == "E")
                         // {
                         //     foreach (var viewDino in dinosaurs)
                         //     {
-                        //         // POSSIBLE LINQ FOR SEARCHING BY NAME (currently does not work):
-                        //         // var viewByName = dinosaurs.OrderBy(dinosaur => dinosaur.Name);
                         //         viewDino.DisplayDinosaurs();
                         //     }
                         // }
-                        // // }
-                        // // else if (howToView == "E")
-                        // // {
-                        // //     foreach (var viewDino in dinosaurs)
-                        // //     {
-                        // //         viewDino.DisplayDinosaurs();
-                        // //     }
-                        // // }
                         break;
 
                     case "A":
