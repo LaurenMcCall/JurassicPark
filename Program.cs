@@ -79,9 +79,9 @@ namespace JurassicPark
 
         static void Main(string[] args)
         {
-            var dinosaurs = new List<Dinosaur>();
 
             var database = new DinosaurDatabase();
+            var dinosaurs = new List<Dinosaur>();
 
             database.LoadDinosaurs();
 
@@ -123,28 +123,26 @@ namespace JurassicPark
                                 viewDino.DisplayDinosaurs();
                             }
                         }
-                        database.SaveDinosaurs();
                         break;
 
                     case "A":
-                        var addDino = new Dinosaur();
+                        var addDinosaur = new Dinosaur();
 
                         Console.WriteLine("");
                         Console.ForegroundColor = ConsoleColor.Cyan;
-                        addDino.Name = PromptForString("What is your dino's name? ").ToUpper();
-                        addDino.DietType = PromptForString("Is your dino an (H)erbivore or a (C)arnivore? ").ToUpper();
-                        if (addDino.DietType == "H")
+                        addDinosaur.Name = PromptForString("What is your dino's name? ").ToUpper();
+                        addDinosaur.DietType = PromptForString("Is your dino an (H)erbivore or a (C)arnivore? ").ToUpper();
+                        if (addDinosaur.DietType == "H")
                         {
-                            addDino.DietType = "Herbivore";
+                            addDinosaur.DietType = "Herbivore";
                         }
-                        else if (addDino.DietType == "C")
+                        else if (addDinosaur.DietType == "C")
                         {
-                            addDino.DietType = "Carnivore";
+                            addDinosaur.DietType = "Carnivore";
                         }
-                        addDino.WhenAcquired = DateTime.Now;
-                        addDino.Weight = PromptForInteger("How much does your dino weigh in pounds? ");
-                        addDino.EnclosureNumber = PromptForInteger("Please assign an enclosure number to your dino: ");
-
+                        addDinosaur.WhenAcquired = DateTime.Now;
+                        addDinosaur.Weight = PromptForInteger("How much does your dino weigh in pounds? ");
+                        addDinosaur.EnclosureNumber = PromptForInteger("Please assign an enclosure number to your dino: ");
                         // WANT TO PROMPT USER TO INPUT NEW NUMBER IF ENCLOSURE IS ALREADY TAKEN
 
                         // bool enclosureNumberAlreadyAssigned = dinosaurs.Any(cageNumber => cageNumber.EnclosureNumber == dino.EnclosureNumber);
@@ -153,9 +151,7 @@ namespace JurassicPark
                         //     Console.WriteLine("That enclosure number has already been assigned. Please input another one. ");
                         // }
                         Console.WriteLine("");
-
-                        dinosaurs.Add(addDino);
-                        database.SaveDinosaurs();
+                        database.AddDinosaur(addDinosaur);
                         break;
 
                     case "R":
@@ -163,14 +159,15 @@ namespace JurassicPark
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         var nameToSearch = PromptForString("What is the name of the dinosaur you'd like to remove? ").ToUpper();
 
-                        Dinosaur foundDino = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == nameToSearch);
-                        if (dinosaurs.Count < 1)
+                        Dinosaur foundDino = database.FindOneDinosaur(nameToSearch);
+                        // Dinosaur foundDino = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == nameToSearch);
+                        if (dinosaurs.Count == 0)
                         {
                             DinosaurDatabase.NoDinosInTheParkMessage();
                         }
 
                         // WHY ISN'T THIS SHOWING UP WHEN THERE ARE NO DINOs IN THE LIST?
-                        else if (foundDino == null)
+                        if (foundDino == null)
                         {
                             NoMatchFound();
                         }
@@ -181,14 +178,9 @@ namespace JurassicPark
                             var confirmRemoval = PromptForString($"Are you sure you want to remove {foundDino.Name} from the park? (Y)ES or (N)O ").ToUpper();
                             if (confirmRemoval == "Y")
                             {
-                                dinosaurs.Remove(foundDino);
-                                Console.WriteLine("");
-                                Console.ForegroundColor = ConsoleColor.Cyan;
-                                Console.WriteLine($"{foundDino.Name} has been removed from the park. Bye, {foundDino.Name}! We'll miss you 💙 ");
-                                Console.WriteLine("");
+                                database.RemoveDinosaur(foundDino);
                             }
                         }
-                        database.SaveDinosaurs();
                         break;
 
                     case "T":
@@ -196,7 +188,7 @@ namespace JurassicPark
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         var nameToMove = PromptForString("What is the name of the dinosaur you'd like to transfer? ").ToUpper();
 
-                        Dinosaur moveDino = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == nameToMove);
+                        Dinosaur moveDino = database.FindOneDinosaur(nameToMove);
 
                         if (dinosaurs.Count < 1)
                         {
@@ -214,7 +206,6 @@ namespace JurassicPark
                             moveDino.EnclosureNumber = PromptForInteger($"Please list {moveDino.Name}'s new enclosure number: ");
                             Console.WriteLine("");
                         }
-                        database.SaveDinosaurs();
                         break;
 
                     case "S":
@@ -237,7 +228,6 @@ namespace JurassicPark
                             Console.WriteLine($"🍃 Herbivores: {numberOfHerbivores} ");
                             Console.WriteLine($"🍖 Carnivores: {numberOfCarnivores} ");
                         }
-                        database.SaveDinosaurs();
                         break;
 
                     case "Q":
@@ -255,6 +245,7 @@ namespace JurassicPark
             }
 
         }
+
     }
 }
 

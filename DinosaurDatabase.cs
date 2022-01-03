@@ -14,17 +14,29 @@ namespace JurassicPark
 
         private string FileName = "dinosaur.csv";
 
-        // // METHOD for adding a dino
-        // public void AddDinosaur(Dinosaur newDinosaur)
-        // {
-        //     Dinosaurs.Add(newDinosaur);
-        // }
+        // METHOD FOR ADDING DINO
+        public void AddDinosaur(Dinosaur newDinosaur)
+        {
+            Dinosaurs.Add(newDinosaur);
+        }
 
-        // METHOD for deleting a dino
-        // public void RemoveDinosaur(Dinosaur removeDinosaur)
-        // {
-        //     Dinosaurs.Remove(removeDinosaur);
-        // }
+        // METHOD FOR DELETING DINO
+        public void RemoveDinosaur(Dinosaur removeDinosaur)
+        {
+            Dinosaurs.Remove(removeDinosaur);
+            Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine($"{removeDinosaur.Name} has been removed from the park. Bye, {removeDinosaur.Name}! We'll miss you 💙 ");
+            Console.WriteLine("");
+        }
+
+        // METHOD TO FIND DINO BY NAME
+        public Dinosaur FindOneDinosaur(string dinoName)
+        {
+            Dinosaur foundDinosaur = Dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name.ToUpper().Contains(dinoName.ToUpper()));
+
+            return foundDinosaur;
+        }
 
         public void LoadDinosaurs()
         {
@@ -50,11 +62,6 @@ namespace JurassicPark
 
             fileWriter.Close();
         }
-
-        // public void ViewDinosInThePark()
-        // {
-
-        // }
 
         public static void NoDinosInTheParkMessage()
         {
