@@ -43,6 +43,13 @@ namespace JurassicPark
             Console.ForegroundColor = ConsoleColor.White;
         }
 
+        static void NoMatchFound()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("");
+            Console.WriteLine("❗No match found❗");
+        }
+
         // prompt for string method
         static string PromptForString(string prompt)
         {
@@ -72,10 +79,6 @@ namespace JurassicPark
 
         static void Main(string[] args)
         {
-            //   - List<Dinosaurs>
-            //     - keeps track of my Dinosaurs
-
-
             var dinosaurs = new List<Dinosaur>();
 
             var database = new DinosaurDatabase();
@@ -169,9 +172,7 @@ namespace JurassicPark
                         // WHY ISN'T THIS SHOWING UP WHEN THERE ARE NO DINOs IN THE LIST?
                         else if (foundDino == null)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("");
-                            Console.WriteLine("❗No match found❗");
+                            NoMatchFound();
                         }
                         else
                         {
@@ -203,9 +204,7 @@ namespace JurassicPark
                         }
                         else if (moveDino == null)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("");
-                            Console.WriteLine("❗No match found❗");
+                            NoMatchFound();
                         }
                         else
                         {
@@ -251,7 +250,7 @@ namespace JurassicPark
                         Console.WriteLine("❗That is not a valid selection. Try again❗");
                         break;
                 }
-                // database.SaveDinosaurs();
+                database.SaveDinosaurs();
 
             }
 

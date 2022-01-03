@@ -50,10 +50,12 @@ namespace JurassicPark
 
             fileWriter.Close();
         }
+
         // public void ViewDinosInThePark()
         // {
 
         // }
+
         public static void NoDinosInTheParkMessage()
         {
             Console.WriteLine("");
