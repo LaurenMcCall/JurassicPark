@@ -96,6 +96,8 @@ namespace JurassicPark
                 switch (choice)
                 {
                     case "V":
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("");
                         var userViewPreference = PromptForString("Would you like to view the dinosaurs by (N)AME or (E)NCLOSURE NUMBER? ").ToUpper();
                         var viewByName = dinosaurs.OrderBy(dinosaur => dinosaur.Name);
                         var viewByEnclosureNumber = dinosaurs.OrderBy(dinosaur => dinosaur.EnclosureNumber);
@@ -118,6 +120,7 @@ namespace JurassicPark
                                 viewDino.DisplayDinosaurs();
                             }
                         }
+                        database.SaveDinosaurs();
                         break;
 
                     case "A":
@@ -149,6 +152,7 @@ namespace JurassicPark
                         Console.WriteLine("");
 
                         dinosaurs.Add(addDino);
+                        database.SaveDinosaurs();
                         break;
 
                     case "R":
@@ -183,10 +187,12 @@ namespace JurassicPark
                                 Console.WriteLine("");
                             }
                         }
+                        database.SaveDinosaurs();
                         break;
 
                     case "T":
                         Console.WriteLine("");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         var nameToMove = PromptForString("What is the name of the dinosaur you'd like to transfer? ").ToUpper();
 
                         Dinosaur moveDino = dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name == nameToMove);
@@ -209,6 +215,7 @@ namespace JurassicPark
                             moveDino.EnclosureNumber = PromptForInteger($"Please list {moveDino.Name}'s new enclosure number: ");
                             Console.WriteLine("");
                         }
+                        database.SaveDinosaurs();
                         break;
 
                     case "S":
@@ -231,6 +238,7 @@ namespace JurassicPark
                             Console.WriteLine($"🍃 Herbivores: {numberOfHerbivores} ");
                             Console.WriteLine($"🍖 Carnivores: {numberOfCarnivores} ");
                         }
+                        database.SaveDinosaurs();
                         break;
 
                     case "Q":
@@ -243,9 +251,10 @@ namespace JurassicPark
                         Console.WriteLine("❗That is not a valid selection. Try again❗");
                         break;
                 }
+                // database.SaveDinosaurs();
+
             }
 
-            database.SaveDinosaurs();
         }
     }
 }
