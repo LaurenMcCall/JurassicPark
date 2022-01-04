@@ -10,7 +10,7 @@ namespace JurassicPark
     class DinosaurDatabase
     {
         // QUESTION ABOUT THIS...
-        private List<Dinosaur> Dinosaurs { get; set; } = new List<Dinosaur>();
+        public List<Dinosaur> Dinosaurs { get; set; } = new List<Dinosaur>();
 
         private string FileName = "dinosaur.csv";
 
