@@ -76,64 +76,6 @@ namespace JurassicPark
                 return 0;
             }
         }
-
-        static void Main(string[] args)
-        {
-
-            var database = new DinosaurDatabase();
-            // var dinosaurs = new List<Dinosaur>();
-
-            database.LoadDinosaurs();
-
-            DisplayGreeting();
-
-            var keepGoing = true;
-
-            while (keepGoing)
-            {
-                // - display menu  
-                DisplayMenu();
-
-                var choice = Console.ReadLine().ToUpper();
-
-                switch (choice)
-                {
-                    case "V":
-                        ViewAllDinos(database.Dinosaurs);
-                        break;
-
-                    case "A":
-                        AddNewDino(database);
-                        break;
-
-                    case "R":
-                        RemoveDinosaur(database);
-                        break;
-
-                    case "T":
-                        TransferDino(database);
-                        break;
-
-                    case "S":
-                        ShowDinosByDietType(database);
-                        break;
-
-                    case "Q":
-                        keepGoing = false;
-                        break;
-
-                    default:
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("");
-                        Console.WriteLine("❗That is not a valid selection. Try again❗");
-                        break;
-                }
-                database.SaveDinosaurs();
-
-            }
-
-        }
-
         private static void ShowDinosByDietType(DinosaurDatabase database)
         {
             // count number of herbivores in dinosaurs list
@@ -271,8 +213,65 @@ namespace JurassicPark
                     viewDino.DisplayDinosaurs();
                 }
             }
+        }
+
+        static void Main(string[] args)
+        {
+
+            var database = new DinosaurDatabase();
+            // var dinosaurs = new List<Dinosaur>();
+
+            database.LoadDinosaurs();
+
+            DisplayGreeting();
+
+            var keepGoing = true;
+
+            while (keepGoing)
+            {
+                // - display menu  
+                DisplayMenu();
+
+                var choice = Console.ReadLine().ToUpper();
+
+                switch (choice)
+                {
+                    case "V":
+                        ViewAllDinos(database.Dinosaurs);
+                        break;
+
+                    case "A":
+                        AddNewDino(database);
+                        break;
+
+                    case "R":
+                        RemoveDinosaur(database);
+                        break;
+
+                    case "T":
+                        TransferDino(database);
+                        break;
+
+                    case "S":
+                        ShowDinosByDietType(database);
+                        break;
+
+                    case "Q":
+                        keepGoing = false;
+                        break;
+
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("");
+                        Console.WriteLine("❗That is not a valid selection. Try again❗");
+                        break;
+                }
+                database.SaveDinosaurs();
+
+            }
 
         }
+
     }
 }
 
