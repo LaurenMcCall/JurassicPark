@@ -136,6 +136,7 @@ namespace JurassicPark
                 return 0;
             }
         }
+
         public static void ShowDinosByDietType(DinosaurDatabase database)
         {
             // count number of herbivores in dinosaurs list
@@ -197,8 +198,6 @@ namespace JurassicPark
             {
                 DinosaurDatabase.NoDinosInTheParkMessage();
             }
-
-            // WHY ISN'T THIS SHOWING UP WHEN THERE ARE NO DINOs IN THE LIST?
             if (foundDino == null)
             {
                 NoMatchFound();
@@ -221,7 +220,23 @@ namespace JurassicPark
 
             Console.WriteLine("");
             Console.ForegroundColor = ConsoleColor.Cyan;
-            addDinosaur.Name = PromptForString("What is your dino's name? ").ToUpper();
+            var isGoodName = true;
+            do
+            {
+                addDinosaur.Name = PromptForString("What is your dino's name? ").ToUpper();
+                var nameTaken = database.Dinosaurs.Any(dinosaur => dinosaur.Name == addDinosaur.Name);
+
+                if (nameTaken == true)
+                {
+                    Console.WriteLine($"A dino with the name {addDinosaur.Name} is already living in Jurassic Park. Please input a different name. ");
+                    isGoodName = false;
+                }
+                else
+                {
+                    break;
+                }
+            } while (isGoodName != true);
+
             addDinosaur.DietType = PromptForString("Is your dino an (H)erbivore or a (C)arnivore? ").ToUpper();
             if (addDinosaur.DietType == "H")
             {
@@ -234,13 +249,6 @@ namespace JurassicPark
             addDinosaur.WhenAcquired = DateTime.Now;
             addDinosaur.Weight = PromptForInteger("How much does your dino weigh in pounds? ");
             addDinosaur.EnclosureNumber = PromptForInteger("Please assign an enclosure number to your dino: ");
-            // WANT TO PROMPT USER TO INPUT NEW NUMBER IF ENCLOSURE IS ALREADY TAKEN
-
-            // bool enclosureNumberAlreadyAssigned = dinosaurs.Any(cageNumber => cageNumber.EnclosureNumber == dino.EnclosureNumber);
-            // if (enclosureNumberAlreadyAssigned == true)
-            // {
-            //     Console.WriteLine("That enclosure number has already been assigned. Please input another one. ");
-            // }
             Console.WriteLine("");
             database.AddDinosaur(addDinosaur);
         }
