@@ -9,18 +9,15 @@ namespace JurassicPark
 {
     class DinosaurDatabase
     {
-        // QUESTION ABOUT THIS...
         public List<Dinosaur> Dinosaurs { get; set; } = new List<Dinosaur>();
 
         private string FileName = "dinosaur.csv";
 
-        // METHOD FOR ADDING DINO
         private void AddDinosaur(Dinosaur newDinosaur)
         {
             Dinosaurs.Add(newDinosaur);
         }
 
-        // METHOD FOR DELETING DINO
         private void RemoveDinosaur(Dinosaur removeDinosaur)
         {
             Dinosaurs.Remove(removeDinosaur);
@@ -30,7 +27,6 @@ namespace JurassicPark
             Console.WriteLine("");
         }
 
-        // METHOD TO FIND DINO BY NAME
         Dinosaur FindOneDinosaur(string dinoName)
         {
             Dinosaur foundDinosaur = Dinosaurs.FirstOrDefault(dinosaur => dinosaur.Name.ToUpper().Contains(dinoName.ToUpper()));
@@ -70,7 +66,6 @@ namespace JurassicPark
             Console.WriteLine("There are no dinos in the park, just dino eggs. Check back again once they've hatched 🐣 ");
         }
 
-        // // - display welcome greeting
         public static void DisplayGreeting()
 
         {
@@ -110,7 +105,6 @@ namespace JurassicPark
             Console.WriteLine("❗No match found❗");
         }
 
-        // prompt for string method
         public static string PromptForString(string prompt)
         {
             Console.Write(prompt);
@@ -119,7 +113,6 @@ namespace JurassicPark
             return userInput;
         }
 
-        // prompt for integer
         public static int PromptForInteger(string prompt)
         {
             Console.Write(prompt);
@@ -277,6 +270,7 @@ namespace JurassicPark
             // return new DateTime(month, day, year);
 
         }
+
         public static void ViewAllDinos(List<Dinosaur> dinosaurs)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
