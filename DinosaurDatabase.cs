@@ -275,7 +275,7 @@ namespace JurassicPark
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("");
-            var userViewPreference = PromptForString("Would you like to view the dinosaurs by (N)AME, (E)NCLOSURE NUMBER, or just the dinos acquired after a certain (D)ATE? ").ToUpper();
+            var userViewPreference = PromptForString("Would you like to view all of the dinosaurs by (N)AME or (E)NCLOSURE NUMBER, \nor just the dinos acquired after a certain (D)ATE or (I)N A GIVEN ENCLOSURE NUMBER? ").ToUpper();
             Console.WriteLine("");
             var viewByName = dinosaurs.OrderBy(dinosaur => dinosaur.Name);
             var viewByEnclosureNumber = dinosaurs.OrderBy(dinosaur => dinosaur.EnclosureNumber);
@@ -303,6 +303,15 @@ namespace JurassicPark
                 var dateRequest = PromptDateTime();
                 var viewByDateAcquired = dinosaurs.Where(dinosaur => dinosaur.WhenAcquired >= dateRequest);
                 foreach (var viewDino in viewByDateAcquired)
+                {
+                    viewDino.DisplayDinosaurs();
+                }
+            }
+            else if (userViewPreference == "I")
+            {
+                var givenEnclosureNumber = PromptForInteger("Which enclosure number would you like to view? ");
+                var viewDinosInGivenEnclosureNumber = dinosaurs.Where(dinosaur => dinosaur.EnclosureNumber == givenEnclosureNumber);
+                foreach (var viewDino in viewDinosInGivenEnclosureNumber)
                 {
                     viewDino.DisplayDinosaurs();
                 }
