@@ -253,11 +253,36 @@ namespace JurassicPark
             database.AddDinosaur(addDinosaur);
         }
 
+        public static DateTime PromptDateTime()
+        {
+            Console.WriteLine("To view all dinos acquired after a specific date, input a date in the following format: mm/dd/yyyy ");
+            Console.WriteLine("");
+            DateTime userDateInput = DateTime.ParseExact(Console.ReadLine(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            return userDateInput;
+            // Console.WriteLine("");
+            // Console.WriteLine("Month: (mm) ");
+            // Console.WriteLine("");
+            // var month = Convert.ToInt32(Console.ReadLine());
+
+            // Console.WriteLine("");
+            // Console.WriteLine("Day: (dd) ");
+            // Console.WriteLine("");
+            // var day = Convert.ToInt32(Console.ReadLine());
+
+            // Console.WriteLine("");
+            // Console.WriteLine("Year: (yyyy) ");
+            // Console.WriteLine("");
+            // var year = Convert.ToInt32(Console.ReadLine());
+
+            // return new DateTime(month, day, year);
+
+        }
         public static void ViewAllDinos(List<Dinosaur> dinosaurs)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("");
-            var userViewPreference = PromptForString("Would you like to view the dinosaurs by (N)AME or (E)NCLOSURE NUMBER? ").ToUpper();
+            var userViewPreference = PromptForString("Would you like to view the dinosaurs by (N)AME, (E)NCLOSURE NUMBER, or just the dinos acquired after a certain (D)ATE? ").ToUpper();
+            Console.WriteLine("");
             var viewByName = dinosaurs.OrderBy(dinosaur => dinosaur.Name);
             var viewByEnclosureNumber = dinosaurs.OrderBy(dinosaur => dinosaur.EnclosureNumber);
 
@@ -275,6 +300,15 @@ namespace JurassicPark
             else if (userViewPreference == "E")
             {
                 foreach (var viewDino in viewByEnclosureNumber)
+                {
+                    viewDino.DisplayDinosaurs();
+                }
+            }
+            else if (userViewPreference == "D")
+            {
+                var dateRequest = PromptDateTime();
+                var viewByDateAcquired = dinosaurs.Where(dinosaur => dinosaur.WhenAcquired >= dateRequest);
+                foreach (var viewDino in viewByDateAcquired)
                 {
                     viewDino.DisplayDinosaurs();
                 }
